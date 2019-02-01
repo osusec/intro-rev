@@ -99,3 +99,168 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x0804855f <+159>:	leave
    0x08048560 <+160>:	ret
 ```
+
+## [`while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L33)
+```asm
+   0x08048561 <+0>:	push   %ebp
+   0x08048562 <+1>:	mov    %esp,%ebp
+   0x08048564 <+3>:	push   %ebx
+   0x08048565 <+4>:	sub    $0x14,%esp
+   0x08048568 <+7>:	call   0x8048390 <__x86.get_pc_thunk.bx>
+   0x0804856d <+12>:	add    $0x1a93,%ebx
+   0x08048573 <+18>:	movl   $0x0,-0xc(%ebp)
+   0x0804857a <+25>:	jmp    0x8048592 <while_func+49>
+   0x0804857c <+27>:	sub    $0xc,%esp
+   0x0804857f <+30>:	lea    -0x1779(%ebx),%eax
+   0x08048585 <+36>:	push   %eax
+   0x08048586 <+37>:	call   0x8048310 <puts@plt>
+   0x0804858b <+42>:	add    $0x10,%esp
+   0x0804858e <+45>:	addl   $0x1,-0xc(%ebp)
+   0x08048592 <+49>:	cmpl   $0x6,-0xc(%ebp)
+   0x08048596 <+53>:	jle    0x804857c <while_func+27>
+   0x08048598 <+55>:	sub    $0xc,%esp
+   0x0804859b <+58>:	lea    -0x1773(%ebx),%eax
+   0x080485a1 <+64>:	push   %eax
+   0x080485a2 <+65>:	call   0x8048310 <puts@plt>
+   0x080485a7 <+70>:	add    $0x10,%esp
+   0x080485aa <+73>:	nop
+   0x080485ab <+74>:	mov    -0x4(%ebp),%ebx
+   0x080485ae <+77>:	leave
+   0x080485af <+78>:	ret
+```
+
+## [`do_while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L42)
+```asm
+   0x080485b0 <+0>:	push   %ebp
+   0x080485b1 <+1>:	mov    %esp,%ebp
+   0x080485b3 <+3>:	push   %ebx
+   0x080485b4 <+4>:	sub    $0x14,%esp
+   0x080485b7 <+7>:	call   0x8048390 <__x86.get_pc_thunk.bx>
+   0x080485bc <+12>:	add    $0x1a44,%ebx
+   0x080485c2 <+18>:	movl   $0x0,-0xc(%ebp)
+   0x080485c9 <+25>:	sub    $0xc,%esp
+   0x080485cc <+28>:	lea    -0x176c(%ebx),%eax
+   0x080485d2 <+34>:	push   %eax
+   0x080485d3 <+35>:	call   0x8048310 <puts@plt>
+   0x080485d8 <+40>:	add    $0x10,%esp
+   0x080485db <+43>:	addl   $0x1,-0xc(%ebp)
+   0x080485df <+47>:	cmpl   $0x6,-0xc(%ebp)
+   0x080485e3 <+51>:	jle    0x80485c9 <do_while_func+25>
+   0x080485e5 <+53>:	sub    $0xc,%esp
+   0x080485e8 <+56>:	lea    -0x1766(%ebx),%eax
+   0x080485ee <+62>:	push   %eax
+   0x080485ef <+63>:	call   0x8048310 <puts@plt>
+   0x080485f4 <+68>:	add    $0x10,%esp
+   0x080485f7 <+71>:	nop
+   0x080485f8 <+72>:	mov    -0x4(%ebp),%ebx
+   0x080485fb <+75>:	leave
+   0x080485fc <+76>:	ret
+```
+
+## [`for_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L51)
+```asm
+   0x080485fd <+0>:	push   %ebp
+   0x080485fe <+1>:	mov    %esp,%ebp
+   0x08048600 <+3>:	push   %ebx
+   0x08048601 <+4>:	sub    $0x14,%esp
+   0x08048604 <+7>:	call   0x8048390 <__x86.get_pc_thunk.bx>
+   0x08048609 <+12>:	add    $0x19f7,%ebx
+   0x0804860f <+18>:	movl   $0x0,-0xc(%ebp)
+   0x08048616 <+25>:	jmp    0x804862e <for_func+49>
+   0x08048618 <+27>:	sub    $0xc,%esp
+   0x0804861b <+30>:	lea    -0x175f(%ebx),%eax
+   0x08048621 <+36>:	push   %eax
+   0x08048622 <+37>:	call   0x8048310 <puts@plt>
+   0x08048627 <+42>:	add    $0x10,%esp
+   0x0804862a <+45>:	addl   $0x1,-0xc(%ebp)
+   0x0804862e <+49>:	cmpl   $0x9,-0xc(%ebp)
+   0x08048632 <+53>:	jle    0x8048618 <for_func+27>
+   0x08048634 <+55>:	sub    $0xc,%esp
+   0x08048637 <+58>:	lea    -0x1758(%ebx),%eax
+   0x0804863d <+64>:	push   %eax
+   0x0804863e <+65>:	call   0x8048310 <puts@plt>
+   0x08048643 <+70>:	add    $0x10,%esp
+   0x08048646 <+73>:	nop
+   0x08048647 <+74>:	mov    -0x4(%ebp),%ebx
+   0x0804864a <+77>:	leave
+   0x0804864b <+78>:	ret
+```
+
+## [`callee1()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L59)
+```asm
+   0x0804864c <+0>:	push   %ebp
+   0x0804864d <+1>:	mov    %esp,%ebp
+   0x0804864f <+3>:	push   %ebx
+   0x08048650 <+4>:	sub    $0x4,%esp
+   0x08048653 <+7>:	call   0x80487bb <__x86.get_pc_thunk.ax>
+   0x08048658 <+12>:	add    $0x19a8,%eax
+   0x0804865d <+17>:	sub    $0x4,%esp
+   0x08048660 <+20>:	pushl  0xc(%ebp)
+   0x08048663 <+23>:	pushl  0x8(%ebp)
+   0x08048666 <+26>:	lea    -0x1750(%eax),%edx
+   0x0804866c <+32>:	push   %edx
+   0x0804866d <+33>:	mov    %eax,%ebx
+   0x0804866f <+35>:	call   0x8048300 <printf@plt>
+   0x08048674 <+40>:	add    $0x10,%esp
+   0x08048677 <+43>:	nop
+   0x08048678 <+44>:	mov    -0x4(%ebp),%ebx
+   0x0804867b <+47>:	leave
+   0x0804867c <+48>:	ret
+```
+
+## [`callee2()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L63)
+```asm
+   0x0804867d <+0>:	push   %ebp
+   0x0804867e <+1>:	mov    %esp,%ebp
+   0x08048680 <+3>:	push   %ebx
+   0x08048681 <+4>:	sub    $0x4,%esp
+   0x08048684 <+7>:	call   0x80487bb <__x86.get_pc_thunk.ax>
+   0x08048689 <+12>:	add    $0x1977,%eax
+   0x0804868e <+17>:	pushl  0x10(%ebp)
+   0x08048691 <+20>:	pushl  0xc(%ebp)
+   0x08048694 <+23>:	pushl  0x8(%ebp)
+   0x08048697 <+26>:	lea    -0x173a(%eax),%edx
+   0x0804869d <+32>:	push   %edx
+   0x0804869e <+33>:	mov    %eax,%ebx
+   0x080486a0 <+35>:	call   0x8048300 <printf@plt>
+   0x080486a5 <+40>:	add    $0x10,%esp
+   0x080486a8 <+43>:	mov    0xc(%ebp),%eax
+   0x080486ab <+46>:	sub    0x8(%ebp),%eax
+   0x080486ae <+49>:	mov    -0x4(%ebp),%ebx
+   0x080486b1 <+52>:	leave
+   0x080486b2 <+53>:	ret
+
+```
+
+## [`caller()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L68)
+```asm
+   0x080486b3 <+0>:	push   %ebp
+   0x080486b4 <+1>:	mov    %esp,%ebp
+   0x080486b6 <+3>:	push   %ebx
+   0x080486b7 <+4>:	sub    $0x14,%esp
+   0x080486ba <+7>:	call   0x8048390 <__x86.get_pc_thunk.bx>
+   0x080486bf <+12>:	add    $0x1941,%ebx
+   0x080486c5 <+18>:	sub    $0x8,%esp
+   0x080486c8 <+21>:	lea    -0x1721(%ebx),%eax
+   0x080486ce <+27>:	push   %eax
+   0x080486cf <+28>:	push   $0x5
+   0x080486d1 <+30>:	call   0x804864c <callee1>
+   0x080486d6 <+35>:	add    $0x10,%esp
+   0x080486d9 <+38>:	sub    $0x4,%esp
+   0x080486dc <+41>:	push   $0x4
+   0x080486de <+43>:	push   $0x7
+   0x080486e0 <+45>:	push   $0x9
+   0x080486e2 <+47>:	call   0x804867d <callee2>
+   0x080486e7 <+52>:	add    $0x10,%esp
+   0x080486ea <+55>:	mov    %eax,-0xc(%ebp)
+   0x080486ed <+58>:	sub    $0x8,%esp
+   0x080486f0 <+61>:	pushl  -0xc(%ebp)
+   0x080486f3 <+64>:	lea    -0x171c(%ebx),%eax
+   0x080486f9 <+70>:	push   %eax
+   0x080486fa <+71>:	call   0x8048300 <printf@plt>
+   0x080486ff <+76>:	add    $0x10,%esp
+   0x08048702 <+79>:	nop
+   0x08048703 <+80>:	mov    -0x4(%ebp),%ebx
+   0x08048706 <+83>:	leave
+   0x08048707 <+84>:	ret
+```
