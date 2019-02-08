@@ -3,9 +3,13 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
 
 [Link to slides](https://docs.google.com/presentation/d/1uR4zAxgC31a79FtqSMHvD5Pvu3DGKi9sJkuYcCY4AP4/edit?usp=sharing)
 
+To compile, run `make 32` or `make 64` for 32-bit or 64-bit respectively
+
 # Assembly code
 
-## [`if_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L3)
+## 32 bit
+
+### [`if_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L3)
 ```asm
    0x08048456 <+0>:	push   %ebp
    0x08048457 <+1>:	mov    %esp,%ebp
@@ -44,7 +48,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x080484bf <+105>:	ret
 ```
 
-## [`switch_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L14)
+### [`switch_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L14)
 ```asm
    0x080484c0 <+0>:	push   %ebp
    0x080484c1 <+1>:	mov    %esp,%ebp
@@ -100,7 +104,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x08048560 <+160>:	ret
 ```
 
-## [`while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L33)
+### [`while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L33)
 ```asm
    0x08048561 <+0>:	push   %ebp
    0x08048562 <+1>:	mov    %esp,%ebp
@@ -129,7 +133,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x080485af <+78>:	ret
 ```
 
-## [`do_while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L42)
+### [`do_while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L42)
 ```asm
    0x080485b0 <+0>:	push   %ebp
    0x080485b1 <+1>:	mov    %esp,%ebp
@@ -157,7 +161,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x080485fc <+76>:	ret
 ```
 
-## [`for_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L51)
+### [`for_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L51)
 ```asm
    0x080485fd <+0>:	push   %ebp
    0x080485fe <+1>:	mov    %esp,%ebp
@@ -186,7 +190,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x0804864b <+78>:	ret
 ```
 
-## [`callee1()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L59)
+### [`callee1()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L59)
 ```asm
    0x0804864c <+0>:	push   %ebp
    0x0804864d <+1>:	mov    %esp,%ebp
@@ -208,7 +212,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x0804867c <+48>:	ret
 ```
 
-## [`callee2()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L63)
+### [`callee2()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L63)
 ```asm
    0x0804867d <+0>:	push   %ebp
    0x0804867e <+1>:	mov    %esp,%ebp
@@ -232,7 +236,7 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
 
 ```
 
-## [`caller()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L68)
+### [`caller()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L68)
 ```asm
    0x080486b3 <+0>:	push   %ebp
    0x080486b4 <+1>:	mov    %esp,%ebp
@@ -263,4 +267,68 @@ Content used for presentation on January 31st, 2019 at the OSU Security Club.
    0x08048703 <+80>:	mov    -0x4(%ebp),%ebx
    0x08048706 <+83>:	leave
    0x08048707 <+84>:	ret
+```
+
+## 64 bit (I've only included functions that were significantly different)
+
+### [`callee1()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L59)
+```asm
+   0x0000000000400693 <+0>:	push   %rbp
+   0x0000000000400694 <+1>:	mov    %rsp,%rbp
+   0x0000000000400697 <+4>:	sub    $0x10,%rsp
+   0x000000000040069b <+8>:	mov    %edi,-0x4(%rbp)
+   0x000000000040069e <+11>:	mov    %rsi,-0x10(%rbp)
+   0x00000000004006a2 <+15>:	mov    -0x10(%rbp),%rdx
+   0x00000000004006a6 <+19>:	mov    -0x4(%rbp),%eax
+   0x00000000004006a9 <+22>:	mov    %eax,%esi
+   0x00000000004006ab <+24>:	lea    0x212(%rip),%rdi        # 0x4008c4
+   0x00000000004006b2 <+31>:	mov    $0x0,%eax
+   0x00000000004006b7 <+36>:	callq  0x400440 <printf@plt>
+   0x00000000004006bc <+41>:	nop
+   0x00000000004006bd <+42>:	leaveq
+   0x00000000004006be <+43>:	retq
+```
+
+### [`callee2()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L63)
+```asm
+   0x00000000004006bf <+0>:	push   %rbp
+   0x00000000004006c0 <+1>:	mov    %rsp,%rbp
+   0x00000000004006c3 <+4>:	sub    $0x10,%rsp
+   0x00000000004006c7 <+8>:	mov    %edi,-0x4(%rbp)
+   0x00000000004006ca <+11>:	mov    %esi,-0x8(%rbp)
+   0x00000000004006cd <+14>:	mov    %edx,-0xc(%rbp)
+   0x00000000004006d0 <+17>:	mov    -0xc(%rbp),%ecx
+   0x00000000004006d3 <+20>:	mov    -0x8(%rbp),%edx
+   0x00000000004006d6 <+23>:	mov    -0x4(%rbp),%eax
+   0x00000000004006d9 <+26>:	mov    %eax,%esi
+   0x00000000004006db <+28>:	lea    0x1f8(%rip),%rdi        # 0x4008da
+   0x00000000004006e2 <+35>:	mov    $0x0,%eax
+   0x00000000004006e7 <+40>:	callq  0x400440 <printf@plt>
+   0x00000000004006ec <+45>:	mov    -0x8(%rbp),%eax
+   0x00000000004006ef <+48>:	sub    -0x4(%rbp),%eax
+   0x00000000004006f2 <+51>:	leaveq
+   0x00000000004006f3 <+52>:	retq
+```
+
+### [`caller()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L68)
+```asm
+   0x00000000004006f4 <+0>:	push   %rbp
+   0x00000000004006f5 <+1>:	mov    %rsp,%rbp
+   0x00000000004006f8 <+4>:	sub    $0x10,%rsp
+   0x00000000004006fc <+8>:	lea    0x1f0(%rip),%rsi        # 0x4008f3
+   0x0000000000400703 <+15>:	mov    $0x5,%edi
+   0x0000000000400708 <+20>:	callq  0x400693 <callee1>
+   0x000000000040070d <+25>:	mov    $0x4,%edx
+   0x0000000000400712 <+30>:	mov    $0x7,%esi
+   0x0000000000400717 <+35>:	mov    $0x9,%edi
+   0x000000000040071c <+40>:	callq  0x4006bf <callee2>
+   0x0000000000400721 <+45>:	mov    %eax,-0x4(%rbp)
+   0x0000000000400724 <+48>:	mov    -0x4(%rbp),%eax
+   0x0000000000400727 <+51>:	mov    %eax,%esi
+   0x0000000000400729 <+53>:	lea    0x1c8(%rip),%rdi        # 0x4008f8
+   0x0000000000400730 <+60>:	mov    $0x0,%eax
+   0x0000000000400735 <+65>:	callq  0x400440 <printf@plt>
+   0x000000000040073a <+70>:	nop
+   0x000000000040073b <+71>:	leaveq
+   0x000000000040073c <+72>:	retq
 ```

@@ -1,15 +1,16 @@
 CC=gcc
-C_FLAGS=-fno-stack-protector -m32 -no-pie
+C_FLAGS=-fno-stack-protector -no-pie
 
 EXE=rev
 
-all: clean $(EXE)
+all:
+	@echo "specify 32 or 64"
 
-$(EXE): $(EXE).c
-	$(CC) $(C_FLAGS) -o $(EXE) $(EXE).c
+32: $(EXE).c
+	$(CC) $(C_FLAGS) -m32 -o $(EXE)32 $(EXE).c
 
-debug: clean
-	$(CC) $(C_FLAGS) -g -o $(EXE) $(EXE).c
+64: $(EXE).c
+	$(CC) $(C_FLAGS) -o $(EXE)64 $(EXE).c
 
 clean:
-	rm -rf *.o *dsym $(EXE)
+	rm -rf *.o *dsym $(EXE)32 $(EXE)64
