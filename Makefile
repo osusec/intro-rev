@@ -10,7 +10,7 @@ all:
 	$(CC) $(C_FLAGS) -m32 -o $(EXE)32 $(EXE).c
 
 64: $(EXE).c
-	$(CC) $(C_FLAGS) -o $(EXE)64 $(EXE).c
+	$(CC) $(C_FLAGS) -fcf-protection=none -o $(EXE)64 $(EXE).c
 
 clean:
 	rm -rf *.o *dsym $(EXE)32 $(EXE)64

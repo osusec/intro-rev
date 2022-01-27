@@ -271,64 +271,181 @@ To compile, run `make 32` or `make 64` for 32-bit or 64-bit respectively
 
 ## 64 bit (I've only included functions that were significantly different)
 
+### [`if_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L3)
+```asm
+   0x0000000000401136 <+0>:     push   rbp
+   0x0000000000401137 <+1>:     mov    rbp,rsp
+   0x000000000040113a <+4>:     sub    rsp,0x10
+   0x000000000040113e <+8>:     mov    DWORD PTR [rbp-0x4],0x5
+   0x0000000000401145 <+15>:    cmp    DWORD PTR [rbp-0x4],0x7
+   0x0000000000401149 <+19>:    jne    0x401159 <if_func+35>
+   0x000000000040114b <+21>:    lea    rdi,[rip+0xeb2]        # 0x402004
+   0x0000000000401152 <+28>:    call   0x401030 <puts@plt>
+   0x0000000000401157 <+33>:    jmp    0x401179 <if_func+67>
+   0x0000000000401159 <+35>:    cmp    DWORD PTR [rbp-0x4],0x5
+   0x000000000040115d <+39>:    jg     0x40116d <if_func+55>
+   0x000000000040115f <+41>:    lea    rdi,[rip+0xea5]        # 0x40200b
+   0x0000000000401166 <+48>:    call   0x401030 <puts@plt>
+   0x000000000040116b <+53>:    jmp    0x401179 <if_func+67>
+   0x000000000040116d <+55>:    lea    rdi,[rip+0xe9d]        # 0x402011
+   0x0000000000401174 <+62>:    call   0x401030 <puts@plt>
+   0x0000000000401179 <+67>:    nop
+   0x000000000040117a <+68>:    leave  
+   0x000000000040117b <+69>:    ret  
+```
+
+### [`switch_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L14)
+```asm
+   0x000000000040117c <+0>:     push   rbp
+   0x000000000040117d <+1>:     mov    rbp,rsp
+   0x0000000000401180 <+4>:     sub    rsp,0x10
+   0x0000000000401184 <+8>:     mov    DWORD PTR [rbp-0x4],0x8
+   0x000000000040118b <+15>:    cmp    DWORD PTR [rbp-0x4],0x539
+   0x0000000000401192 <+22>:    je     0x4011e1 <switch_func+101>
+   0x0000000000401194 <+24>:    cmp    DWORD PTR [rbp-0x4],0x539
+   0x000000000040119b <+31>:    jg     0x4011ed <switch_func+113>
+   0x000000000040119d <+33>:    cmp    DWORD PTR [rbp-0x4],0x8
+   0x00000000004011a1 <+37>:    je     0x4011d3 <switch_func+87>
+   0x00000000004011a3 <+39>:    cmp    DWORD PTR [rbp-0x4],0x8
+   0x00000000004011a7 <+43>:    jg     0x4011ed <switch_func+113>
+   0x00000000004011a9 <+45>:    cmp    DWORD PTR [rbp-0x4],0x5
+   0x00000000004011ad <+49>:    je     0x4011b7 <switch_func+59>
+   0x00000000004011af <+51>:    cmp    DWORD PTR [rbp-0x4],0x7
+   0x00000000004011b3 <+55>:    je     0x4011c5 <switch_func+73>
+   0x00000000004011b5 <+57>:    jmp    0x4011ed <switch_func+113>
+   0x00000000004011b7 <+59>:    lea    rdi,[rip+0xe5a]        # 0x402018
+   0x00000000004011be <+66>:    call   0x401030 <puts@plt>
+   0x00000000004011c3 <+71>:    jmp    0x4011fa <switch_func+126>
+   0x00000000004011c5 <+73>:    lea    rdi,[rip+0xe53]        # 0x40201f
+   0x00000000004011cc <+80>:    call   0x401030 <puts@plt>
+   0x00000000004011d1 <+85>:    jmp    0x4011fa <switch_func+126>
+   0x00000000004011d3 <+87>:    lea    rdi,[rip+0xe4c]        # 0x402026
+   0x00000000004011da <+94>:    call   0x401030 <puts@plt>
+   0x00000000004011df <+99>:    jmp    0x4011fa <switch_func+126>
+   0x00000000004011e1 <+101>:   lea    rdi,[rip+0xe45]        # 0x40202d
+   0x00000000004011e8 <+108>:   call   0x401030 <puts@plt>
+   0x00000000004011ed <+113>:   lea    rdi,[rip+0xe50]        # 0x402044
+   0x00000000004011f4 <+120>:   call   0x401030 <puts@plt>
+   0x00000000004011f9 <+125>:   nop
+   0x00000000004011fa <+126>:   nop
+   0x00000000004011fb <+127>:   leave  
+   0x00000000004011fc <+128>:   ret 
+```
+
+### [`while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L33)
+```asm
+   0x00000000004011fd <+0>:     push   rbp
+   0x00000000004011fe <+1>:     mov    rbp,rsp
+   0x0000000000401201 <+4>:     sub    rsp,0x10
+   0x0000000000401205 <+8>:     mov    DWORD PTR [rbp-0x4],0x0
+   0x000000000040120c <+15>:    jmp    0x40121e <while_func+33>
+   0x000000000040120e <+17>:    lea    rdi,[rip+0xe36]        # 0x40204b
+   0x0000000000401215 <+24>:    call   0x401030 <puts@plt>
+   0x000000000040121a <+29>:    add    DWORD PTR [rbp-0x4],0x1
+   0x000000000040121e <+33>:    cmp    DWORD PTR [rbp-0x4],0x6
+   0x0000000000401222 <+37>:    jle    0x40120e <while_func+17>
+   0x0000000000401224 <+39>:    lea    rdi,[rip+0xe26]        # 0x402051
+   0x000000000040122b <+46>:    call   0x401030 <puts@plt>
+   0x0000000000401230 <+51>:    nop
+   0x0000000000401231 <+52>:    leave  
+   0x0000000000401232 <+53>:    ret 
+```
+
+### [`do_while_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L42)
+```asm
+   0x0000000000401233 <+0>:     push   rbp
+   0x0000000000401234 <+1>:     mov    rbp,rsp
+   0x0000000000401237 <+4>:     sub    rsp,0x10
+   0x000000000040123b <+8>:     mov    DWORD PTR [rbp-0x4],0x0
+   0x0000000000401242 <+15>:    lea    rdi,[rip+0xe0f]        # 0x402058
+   0x0000000000401249 <+22>:    call   0x401030 <puts@plt>
+   0x000000000040124e <+27>:    add    DWORD PTR [rbp-0x4],0x1
+   0x0000000000401252 <+31>:    cmp    DWORD PTR [rbp-0x4],0x6
+   0x0000000000401256 <+35>:    jle    0x401242 <do_while_func+15>
+   0x0000000000401258 <+37>:    lea    rdi,[rip+0xdff]        # 0x40205e
+   0x000000000040125f <+44>:    call   0x401030 <puts@plt>
+   0x0000000000401264 <+49>:    nop
+   0x0000000000401265 <+50>:    leave  
+   0x0000000000401266 <+51>:    ret
+```
+
+### [`for_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L51)
+```asm
+   0x0000000000401267 <+0>:     push   rbp
+   0x0000000000401268 <+1>:     mov    rbp,rsp
+   0x000000000040126b <+4>:     sub    rsp,0x10
+   0x000000000040126f <+8>:     mov    DWORD PTR [rbp-0x4],0x0
+   0x0000000000401276 <+15>:    jmp    0x401288 <for_func+33>
+   0x0000000000401278 <+17>:    lea    rdi,[rip+0xde6]        # 0x402065
+   0x000000000040127f <+24>:    call   0x401030 <puts@plt>
+   0x0000000000401284 <+29>:    add    DWORD PTR [rbp-0x4],0x1
+   0x0000000000401288 <+33>:    cmp    DWORD PTR [rbp-0x4],0x9
+   0x000000000040128c <+37>:    jle    0x401278 <for_func+17>
+   0x000000000040128e <+39>:    lea    rdi,[rip+0xdd7]        # 0x40206c
+   0x0000000000401295 <+46>:    call   0x401030 <puts@plt>
+   0x000000000040129a <+51>:    nop
+   0x000000000040129b <+52>:    leave  
+   0x000000000040129c <+53>:    ret 
+```
+
 ### [`callee1()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L59)
 ```asm
-   0x0000000000400693 <+0>:	push   %rbp
-   0x0000000000400694 <+1>:	mov    %rsp,%rbp
-   0x0000000000400697 <+4>:	sub    $0x10,%rsp
-   0x000000000040069b <+8>:	mov    %edi,-0x4(%rbp)
-   0x000000000040069e <+11>:	mov    %rsi,-0x10(%rbp)
-   0x00000000004006a2 <+15>:	mov    -0x10(%rbp),%rdx
-   0x00000000004006a6 <+19>:	mov    -0x4(%rbp),%eax
-   0x00000000004006a9 <+22>:	mov    %eax,%esi
-   0x00000000004006ab <+24>:	lea    0x212(%rip),%rdi        # 0x4008c4
-   0x00000000004006b2 <+31>:	mov    $0x0,%eax
-   0x00000000004006b7 <+36>:	callq  0x400440 <printf@plt>
-   0x00000000004006bc <+41>:	nop
-   0x00000000004006bd <+42>:	leaveq
-   0x00000000004006be <+43>:	retq
+   0x000000000040129d <+0>:     push   rbp
+   0x000000000040129e <+1>:     mov    rbp,rsp
+   0x00000000004012a1 <+4>:     sub    rsp,0x10
+   0x00000000004012a5 <+8>:     mov    DWORD PTR [rbp-0x4],edi
+   0x00000000004012a8 <+11>:    mov    QWORD PTR [rbp-0x10],rsi
+   0x00000000004012ac <+15>:    mov    rdx,QWORD PTR [rbp-0x10]
+   0x00000000004012b0 <+19>:    mov    eax,DWORD PTR [rbp-0x4]
+   0x00000000004012b3 <+22>:    mov    esi,eax
+   0x00000000004012b5 <+24>:    lea    rdi,[rip+0xdb8]        # 0x402074
+   0x00000000004012bc <+31>:    mov    eax,0x0
+   0x00000000004012c1 <+36>:    call   0x401040 <printf@plt>
+   0x00000000004012c6 <+41>:    nop
+   0x00000000004012c7 <+42>:    leave  
+   0x00000000004012c8 <+43>:    ret
 ```
 
 ### [`callee2()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L63)
 ```asm
-   0x00000000004006bf <+0>:	push   %rbp
-   0x00000000004006c0 <+1>:	mov    %rsp,%rbp
-   0x00000000004006c3 <+4>:	sub    $0x10,%rsp
-   0x00000000004006c7 <+8>:	mov    %edi,-0x4(%rbp)
-   0x00000000004006ca <+11>:	mov    %esi,-0x8(%rbp)
-   0x00000000004006cd <+14>:	mov    %edx,-0xc(%rbp)
-   0x00000000004006d0 <+17>:	mov    -0xc(%rbp),%ecx
-   0x00000000004006d3 <+20>:	mov    -0x8(%rbp),%edx
-   0x00000000004006d6 <+23>:	mov    -0x4(%rbp),%eax
-   0x00000000004006d9 <+26>:	mov    %eax,%esi
-   0x00000000004006db <+28>:	lea    0x1f8(%rip),%rdi        # 0x4008da
-   0x00000000004006e2 <+35>:	mov    $0x0,%eax
-   0x00000000004006e7 <+40>:	callq  0x400440 <printf@plt>
-   0x00000000004006ec <+45>:	mov    -0x8(%rbp),%eax
-   0x00000000004006ef <+48>:	sub    -0x4(%rbp),%eax
-   0x00000000004006f2 <+51>:	leaveq
-   0x00000000004006f3 <+52>:	retq
+   0x00000000004012c9 <+0>:     push   rbp
+   0x00000000004012ca <+1>:     mov    rbp,rsp
+   0x00000000004012cd <+4>:     sub    rsp,0x10
+   0x00000000004012d1 <+8>:     mov    DWORD PTR [rbp-0x4],edi
+   0x00000000004012d4 <+11>:    mov    DWORD PTR [rbp-0x8],esi
+   0x00000000004012d7 <+14>:    mov    DWORD PTR [rbp-0xc],edx
+   0x00000000004012da <+17>:    mov    ecx,DWORD PTR [rbp-0xc]
+   0x00000000004012dd <+20>:    mov    edx,DWORD PTR [rbp-0x8]
+   0x00000000004012e0 <+23>:    mov    eax,DWORD PTR [rbp-0x4]
+   0x00000000004012e3 <+26>:    mov    esi,eax
+   0x00000000004012e5 <+28>:    lea    rdi,[rip+0xd9e]        # 0x40208a
+   0x00000000004012ec <+35>:    mov    eax,0x0
+   0x00000000004012f1 <+40>:    call   0x401040 <printf@plt>
+   0x00000000004012f6 <+45>:    mov    eax,DWORD PTR [rbp-0x8]
+   0x00000000004012f9 <+48>:    sub    eax,DWORD PTR [rbp-0x4]
+   0x00000000004012fc <+51>:    leave  
+   0x00000000004012fd <+52>:    ret    
 ```
 
 ### [`caller()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L68)
 ```asm
-   0x00000000004006f4 <+0>:	push   %rbp
-   0x00000000004006f5 <+1>:	mov    %rsp,%rbp
-   0x00000000004006f8 <+4>:	sub    $0x10,%rsp
-   0x00000000004006fc <+8>:	lea    0x1f0(%rip),%rsi        # 0x4008f3
-   0x0000000000400703 <+15>:	mov    $0x5,%edi
-   0x0000000000400708 <+20>:	callq  0x400693 <callee1>
-   0x000000000040070d <+25>:	mov    $0x4,%edx
-   0x0000000000400712 <+30>:	mov    $0x7,%esi
-   0x0000000000400717 <+35>:	mov    $0x9,%edi
-   0x000000000040071c <+40>:	callq  0x4006bf <callee2>
-   0x0000000000400721 <+45>:	mov    %eax,-0x4(%rbp)
-   0x0000000000400724 <+48>:	mov    -0x4(%rbp),%eax
-   0x0000000000400727 <+51>:	mov    %eax,%esi
-   0x0000000000400729 <+53>:	lea    0x1c8(%rip),%rdi        # 0x4008f8
-   0x0000000000400730 <+60>:	mov    $0x0,%eax
-   0x0000000000400735 <+65>:	callq  0x400440 <printf@plt>
-   0x000000000040073a <+70>:	nop
-   0x000000000040073b <+71>:	leaveq
-   0x000000000040073c <+72>:	retq
+   0x00000000004012fe <+0>:     push   rbp
+   0x00000000004012ff <+1>:     mov    rbp,rsp
+   0x0000000000401302 <+4>:     sub    rsp,0x10
+   0x0000000000401306 <+8>:     lea    rsi,[rip+0xd96]        # 0x4020a3
+   0x000000000040130d <+15>:    mov    edi,0x5
+   0x0000000000401312 <+20>:    call   0x40129d <callee1>
+   0x0000000000401317 <+25>:    mov    edx,0x4
+   0x000000000040131c <+30>:    mov    esi,0x7
+   0x0000000000401321 <+35>:    mov    edi,0x9
+   0x0000000000401326 <+40>:    call   0x4012c9 <callee2>
+   0x000000000040132b <+45>:    mov    DWORD PTR [rbp-0x4],eax
+   0x000000000040132e <+48>:    mov    eax,DWORD PTR [rbp-0x4]
+   0x0000000000401331 <+51>:    mov    esi,eax
+   0x0000000000401333 <+53>:    lea    rdi,[rip+0xd6e]        # 0x4020a8
+   0x000000000040133a <+60>:    mov    eax,0x0
+   0x000000000040133f <+65>:    call   0x401040 <printf@plt>
+   0x0000000000401344 <+70>:    nop
+   0x0000000000401345 <+71>:    leave  
+   0x0000000000401346 <+72>:    ret  
 ```
