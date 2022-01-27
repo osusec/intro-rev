@@ -269,7 +269,7 @@ To compile, run `make 32` or `make 64` for 32-bit or 64-bit respectively
    0x08048707 <+84>:	ret
 ```
 
-## 64 bit (I've only included functions that were significantly different)
+## 64 bit
 
 ### [`if_func()`](https://github.com/osusec/intro-rev/blob/master/rev.c#L3)
 ```asm
